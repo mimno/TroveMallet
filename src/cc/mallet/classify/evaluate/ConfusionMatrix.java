@@ -219,7 +219,7 @@ public class ConfusionMatrix {
 												 " "+count+" instances "+
 												 df.format(100*(double)count/classifications.size())
 				+"%");
-			index2class.put (new Integer (i), label);
+			index2class.put (Integer.valueOf(i), label);
 		}
 		System.out.println("Confusion Matrix");
 		for(int i=0; i<this.numClasses; i++){
@@ -243,7 +243,7 @@ public class ConfusionMatrix {
 			else
 				f1 = 2 * precision * recall / (precision + recall);
 			System.out.println("Class " +
-												 (String)index2class.get(new Integer (i)));
+												 (String)index2class.get(Integer.valueOf(i)));
 			System.out.println("F1="+df.format(f1)+"%");
 			System.out.println("Recall="+df.format(recall)+"%");
 			System.out.println("Precision="+df.format(precision)+"%");

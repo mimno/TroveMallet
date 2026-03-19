@@ -54,7 +54,7 @@ public class ParallelTopicModel implements Serializable {
 	public int topicBits;
 
 	public int numTypes;
-	public int totalTokens;
+	public long totalTokens;
 
 	public double[] alpha;	 // Dirichlet(alpha,alpha,...) is the distribution over topics
 	public double alphaSum;
@@ -1512,7 +1512,7 @@ public class ParallelTopicModel implements Serializable {
 				builder.append("no-name");
 			}
 
-			docLen = currentDocTopics.length;
+			docLen = topicSequence.size();
 
 			// Count up the tokens
 			for (int token=0; token < docLen; token++) {
@@ -1570,7 +1570,7 @@ public class ParallelTopicModel implements Serializable {
 			}
 
 			builder.append("\t");
-			docLen = currentDocTopics.length;
+			docLen = topicSequence.size();
 
 			// Count up the tokens
 			for (int token=0; token < docLen; token++) {

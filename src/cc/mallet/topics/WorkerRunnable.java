@@ -20,10 +20,12 @@ import cc.mallet.util.Randoms;
 
 /**
  * A parallel topic model runnable task.
- * 
+ *
  * @author David Mimno, Andrew McCallum
+ * @deprecated Use {@link WorkerCallable} instead, which provides better
+ *             thread pool integration via the Callable interface.
  */
-
+@Deprecated
 public class WorkerRunnable implements Runnable {
 	
 	boolean isFinished = true;
@@ -58,9 +60,14 @@ public class WorkerRunnable implements Runnable {
 
 	boolean shouldSaveState = false;
 	boolean shouldBuildLocalCounts = true;
-	
+
 	protected Randoms random;
-	
+
+	// Reusable working arrays for sampling (allocated once, reused per document)
+	protected int[] localTopicCounts;
+	protected int[] localTopicIndex;
+	protected double[] topicTermScores;
+
 	public WorkerRunnable (int numTopics,
 						   double[] alpha, double alphaSum,
 						   double beta, Randoms random,
@@ -99,7 +106,12 @@ public class WorkerRunnable implements Runnable {
 
 		cachedCoefficients = new double[ numTopics ];
 
-		//System.err.println("WorkerRunnable Thread: " + numTopics + " topics, " + topicBits + " topic bits, " + 
+		// Allocate reusable working arrays
+		localTopicCounts = new int[numTopics];
+		localTopicIndex = new int[numTopics];
+		topicTermScores = new double[numTopics];
+
+		//System.err.println("WorkerRunnable Thread: " + numTopics + " topics, " + topicBits + " topic bits, " +
 		//				   Integer.toBinaryString(topicMask) + " topic mask");
 
 	}
@@ -300,8 +312,8 @@ public class WorkerRunnable implements Runnable {
 		double topicWeightsSum;
 		int docLength = tokenSequence.getLength();
 
-		int[] localTopicCounts = new int[numTopics];
-		int[] localTopicIndex = new int[numTopics];
+		// Clear reusable working arrays
+		Arrays.fill(localTopicCounts, 0);
 
 		//		populate topic counts
 		for (int position = 0; position < docLength; position++) {
@@ -341,7 +353,6 @@ public class WorkerRunnable implements Runnable {
 
 		double topicTermMass = 0.0;
 
-		double[] topicTermScores = new double[numTopics];
 		int[] topicTermIndices;
 		int[] topicTermValues;
 		int i;

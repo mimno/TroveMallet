@@ -190,7 +190,7 @@ public class GainRatio extends RankedFeatureVector
 					- (1-passProportion) * Math.log(1-passProportion) / log2;
 				// Calculate the gain ratio
 				double gainRatio = gainDT / splitDT;
-				featureToInfo[fi].put(new Double(splitPoint),
+				featureToInfo[fi].put(Double.valueOf(splitPoint),
 						new Point2D.Double(gainDT, gainRatio));
 			}  // End loop through sorted instances
 		}  // End loop through features
@@ -204,8 +204,8 @@ public class GainRatio extends RankedFeatureVector
 
 		// If all feature vectors are identical or no splits are worthy, return all 0s
 		if (totalNumSplitPoints == 0 || Maths.almostEquals(infoGainSum, 0))
-			return new Object[] {gainRatios, splitPoints, new Double(baseEntropy), 
-				baseLabelDistribution, new Integer(numSplitsForBestFeature)};
+			return new Object[] {gainRatios, splitPoints, Double.valueOf(baseEntropy), 
+				baseLabelDistribution, Integer.valueOf(numSplitsForBestFeature)};
 
 		double avgInfoGain = infoGainSum / totalNumSplitPoints;
 		double maxGainRatio = 0;
@@ -258,8 +258,8 @@ public class GainRatio extends RankedFeatureVector
 		logger.info("label distrib:\n" + baseLabelDistribution);
 		logger.info("base entropy=" + baseEntropy + ", info gain sum=" + infoGainSum + ", total num split points=" + totalNumSplitPoints + ", avg info gain=" + avgInfoGain + ", num splits with < avg gain=" + xxx);
 		
-		return new Object[] {gainRatios, splitPoints, new Double(baseEntropy), 
-				baseLabelDistribution, new Integer(numSplitsForBestFeature)};
+		return new Object[] {gainRatios, splitPoints, Double.valueOf(baseEntropy), 
+				baseLabelDistribution, Integer.valueOf(numSplitsForBestFeature)};
 	}
 	
 	public static int[] sortInstances(InstanceList ilist, int[] instIndices, int featureIndex)

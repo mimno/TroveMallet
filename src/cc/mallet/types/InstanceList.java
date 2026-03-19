@@ -437,7 +437,7 @@ public class InstanceList extends ArrayList<Instance> implements Serializable, I
 		for(int i=0; i<noise_instance_num; i++){
 			int randIndex = r.nextInt(instance_size);	
 			//	System.out.println(i + ": " + randIndex );
-			Integer nn = new Integer(randIndex);	
+			Integer nn = Integer.valueOf(randIndex);	
 			if(randnumlist.indexOf(nn) != -1){
 				i--;
 			}

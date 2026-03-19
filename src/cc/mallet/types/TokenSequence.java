@@ -103,12 +103,15 @@ public class TokenSequence extends ArrayList<Token> implements Sequence, Seriali
 	}
 
 	// added by Fuchun Peng, Oct. 24, 2003
+	// Conflicts with Java 21 API, removing -DM 3/14/2024
+	/*
 	public Object removeLast () {
-		if (this.size() > 0) 
+		if (this.size() > 0)
 			return this.remove (this.size() - 1);
 		else
 			return null;
 	}
+	*/
 
 
 	public void addAll (Object[] objects) {

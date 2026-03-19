@@ -634,7 +634,7 @@ public class SparseVector implements ConstantMatrix, Vector, Serializable
 		values[i] = ((Double)f.invoke 
 			     (null, 
 			      new Object[]
-				 {new Double(values[i])})).doubleValue ();
+				 {Double.valueOf(values[i])})).doubleValue ();
 	} catch (InvocationTargetException e) {
 	    throw e.getTargetException();
 	}

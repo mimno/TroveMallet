@@ -191,12 +191,14 @@ public class CRFTrainerByLabelLikelihood extends TransducerTrainer implements Tr
 		boolean converged = false;
 		for (int i = 0; i < trainingProportions.length; i++) {
 			assert (trainingProportions[i] <= 1.0);
-			logger.info ("Training on "+trainingProportions[i]+"% of the data this round.");
-			if (trainingProportions[i] == 1.0)
+			logger.info ("Training on " + (100 * trainingProportions[i]) + "% of the data this round.");
+			if (trainingProportions[i] == 1.0) {
 				converged = this.train (training, numIterationsPerProportion);
-			else 
-				converged = this.train (training.split (new Random(1),	
-						new double[] {trainingProportions[i],	1-trainingProportions[i]})[0], numIterationsPerProportion);
+			}
+			else {
+				converged = this.train (training.split (new Random(1),
+						new double[] {trainingProportions[i], 1.0 - trainingProportions[i]})[0], numIterationsPerProportion);
+			}
 			trainingIteration += numIterationsPerProportion;
 		}
 		return converged;

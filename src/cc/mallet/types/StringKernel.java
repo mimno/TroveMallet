@@ -72,14 +72,14 @@ public class StringKernel extends LinkedHashMap
 		if (sstmp == null) {
 			ss = sK (s,s,n);
 			if (cache)
-				put (s, new Double (ss));
+				put (s, Double.valueOf(ss));
 		}
 		else
 			ss = sstmp.doubleValue();
 		if (tttmp == null) {
 			tt = sK (t,t,n);
 			if (cache)
-				put (t, new Double (tt));
+				put (t, Double.valueOf(tt));
 		}
 		else
 			tt = tttmp.doubleValue();

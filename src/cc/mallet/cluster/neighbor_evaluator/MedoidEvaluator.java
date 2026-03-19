@@ -230,7 +230,7 @@ public class MedoidEvaluator extends ClassifyingNeighborEvaluator {
 					AgglomerativeNeighbor pwneighbor =
 						new AgglomerativeNeighbor(original,	original,
 																			mergedIndices[i], mergedIndices[j]);
-					scores.add(new Double(getScore(pwneighbor)));
+					scores.add(Double.valueOf(getScore(pwneighbor)));
 				}
 			}
 		}
