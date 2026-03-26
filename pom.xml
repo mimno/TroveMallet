@@ -112,7 +112,6 @@
           </execution>
         </executions>
       </plugin>
-      <!-- disable signing in order to simplify integration
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
@@ -127,7 +126,6 @@
           </execution>
         </executions>
       </plugin>
-      -->
     </plugins>
   </build>
   <dependencies>
